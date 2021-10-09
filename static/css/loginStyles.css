@@ -39,11 +39,11 @@ body, html {
 }
 
 .login-form {
-  padding: 5%;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  padding: 9%;
 }
 
-.login-form h5 {
+.login-form h3 {
+  padding: 19%;
   text-align: center;
   color: rgb(0, 0, 0);
 }
@@ -53,7 +53,7 @@ body, html {
 }
 
 .btnSubmit {
-  width: 50%;
+  width: 100%;
   border-radius: 1rem;
   padding: 1.5%;
   border: none;
@@ -67,6 +67,9 @@ body, html {
 }
 
 .login-form .ForgetPwd {
+  /* height: 100vh; */
+  display: flex;        
+  justify-content: center;
   color: rgb(0, 0, 0);
   font-weight: 600;
   text-decoration: none;
