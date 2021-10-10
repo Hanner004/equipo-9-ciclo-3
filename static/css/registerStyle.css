@@ -43,8 +43,13 @@ html {
   padding: 9%;
 }
 
-.login-form h3 {
-  padding: 19%;
+.login-form h3  {
+  padding: 11%;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+h5 {
   text-align: center;
   color: rgb(0, 0, 0);
 }
