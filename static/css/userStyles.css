@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Mulish", sans-serif;
+  color: #000;
+}
+
+body {
+  background-color: #e5e5e5;
+}
+
+.container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 1fr 7fr;
+  grid-template-areas:
+    "header section-1"
+    "header section-2";
+  color: #444;
+  padding-right: 10px;
+}
+.box {
+  color: #fff;
+}
+
+header {
+  background-color: #3164f4;
+  width: 220px;
+  height: 100vh;
+  grid-area: header;
+}
+
+.title {
+  color: #fff;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.fas{
+  font-size: 14px;
+  color: #fff;
+}
+
+nav {
+  padding-top: 20px;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  margin-top: 5px;
+  padding: 15px 20px;
+}
+
+li:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 1em;
+  line-height: 23px;
+  letter-spacing: 0.2px;
+  padding-left: 5px;
+}
+
+.section-1 {
+  grid-area: section-1;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.user_info {
+  padding: 10px 20px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.username {
+  color: #000;
+  padding-right: 20px;
+}
+
+.section-2 {
+  grid-area: section-2;
+  background-color: #fff;
+  margin: 0 20px 0 20px;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.row{
+  display: flex;
+}
+
+.col-3{
+  width: 30%;
+  text-align: center;
+}
+
+.pic img{
+  width: 9rem;
+  height: 9rem;
+}
+
+.col-7{
+  width: 70%;
+}
+
+.pic_info{
+  padding: 30px 10px;
+}
+
+.name_loc{
+  display: flex;
+  align-self: center;
+  padding: 5px 0px;
+}
+
+.col-7 i,
+.col-7 p{
+  color: gray; 
+  font-size: 12px;
+}
+
+.col{
+  width: 50%;
+  padding: 15px 0px;
+  font-size: 15px;
+}
+
+.col h4{
+  color: #444;
+  padding: 0px 0px 5px 10px;
+}
+
+.data{
+  width: 15rem;
+  height: 1.5rem;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  border-radius: 25px;
+  background-color: #eeeeee;
+}
