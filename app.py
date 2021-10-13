@@ -27,6 +27,10 @@ def admin():
 def userProfile():
     return render_template("userProfile.html", title='Perfil')
 
+@app.route("/user/id/")
+def editUser():
+    return render_template("editUser.html", title='Editar usuario')
+
 
 @app.route("/user/feedback/")
 def userRetroalimentacion():
