@@ -1,11 +1,11 @@
 {% extends "user.html" %}
-{% block body %}
+{% block main_body %}
 <div class="row">
-  <div class="col-3 pic">
+  <div class="col-3 pic-profile">
     <img src='{{ url_for("static", filename="img/profile.png") }}' alt="Imágen User">
   </div>
   <div class="col-7"> 
-    <div class="row_1 pic_info">
+    <div class="row_1 info-profile">
       <h2>Nombre Empleado</h2>
       <div class="name_loc">
         <i class="fas fa-map-marker-alt"></i>

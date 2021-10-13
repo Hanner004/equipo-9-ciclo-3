@@ -99,6 +99,11 @@ a {
   margin-bottom: 30px;
 }
 
+.main__body{
+  overflow: auto;
+  height: 27rem;
+}
+
 .row{
   display: flex;
 }
@@ -108,7 +113,7 @@ a {
   text-align: center;
 }
 
-.pic img{
+.pic-profile img{
   width: 9rem;
   height: 9rem;
 }
@@ -117,7 +122,7 @@ a {
   width: 70%;
 }
 
-.pic_info{
+.info-profile{
   padding: 30px 10px;
 }
 
@@ -128,7 +133,9 @@ a {
 }
 
 .col-7 i,
-.col-7 p{
+.col-7 p,
+.col-8 i,
+.col-8 p{
   color: gray; 
   font-size: 12px;
 }
@@ -153,3 +160,45 @@ a {
   border-radius: 25px;
   background-color: #eeeeee;
 }
+
+/*User feedback*/
+
+.c2{
+  width: 20%;
+  text-align: center;
+}
+
+.pic-feedback img{
+  width: 3rem;
+  height: 3rem;
+}
+
+.c8{
+  width: 80%;
+}
+
+.info-feedback{
+  padding: 10px 20px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feedback_text{
+  width: 90%;
+  height: 5.5rem;
+  padding: 20px;
+  margin-left: 20px;
+  text-align: justify;
+  border-radius: 15px;
+  background-color: #eeeeee;
+  overflow: auto;
+}
+
+.feedback_text h5{
+  color: #444;
+  font-weight: normal;
+}
+
+

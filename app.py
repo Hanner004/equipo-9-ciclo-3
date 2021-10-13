@@ -33,8 +33,8 @@ def editUser():
 
 
 @app.route("/user/feedback/")
-def userRetroalimentacion():
-    return render_template("userRetro.html", title='Retroalimentación')
+def userFeedback():
+    return render_template("userFeedback.html", title='Retroalimentación')
 
 
 if __name__ == "__main__":
