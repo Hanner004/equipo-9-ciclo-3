@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href='{{ url_for("static", filename="css/createEmployee.css") }}'>
+
+	<script src="https://kit.fontawesome.com/13e187c8c8.js" crossorigin="anonymous"></script>
+
+	<title>Crear empleado</title>
+</head>
+
+<body>
+	<div class="container">
+		<h2 class="title">Crear empleado</h2>
+		<div class="form-container">
+			<form class="form">
+				<h3 class="subtitle">Ingresa los datos personales del empleado.</h3>
+				<div class="row">
+					<div class="input-form">
+						<i class="fas fa-user"></i>
+						<input type="text" class="form-control" placeholder="Nombre completo" />
+					</div>
+					<div class="input-form">
+						<i class="fas fa-phone"></i>
+						<input type="tel" class="form-control" placeholder="Teléfono" />
+					</div>
+					<div class="input-form">
+						<i class="fas fa-map-marker-alt"></i>
+						<input type="text" class="form-control" placeholder="País" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-form">
+						<i class="fas fa-map-marker-alt"></i>
+						<input type="text" class="form-control" placeholder="Departamento" />
+					</div>
+					<div class="input-form">
+						<i class="fas fa-map-marker-alt"></i>
+						<input type="text" class="form-control" placeholder="Ciudad" />
+					</div>
+					<div class="input-form">
+						<i class="fas fa-map-marker-alt"></i>
+						<input type="text" class="form-control" placeholder="Dirección" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-form">
+						<i class="fas fa-envelope"></i>
+						<input type="email" class="form-control" placeholder="Correo electrónico" />
+					</div>
+					<div class="input-form">
+						<i class="fas fa-lock"></i>
+						<input type="password" class="form-control" placeholder="Contraseña" />
+					</div>
+					<div class="input-form">
+						<i class="fas fa-lock"></i>
+						<input type="password" class="form-control" placeholder="Confirmar Contraseña" />
+					</div>
+				</div>
+				<h3 class="subtitle">Ingresa la información del contrato del empleado.</h3>
+				<div class="row">
+					<div class="input-form">
+						<i class="fas fa-suitcase"></i>
+						<input type="text" class="form-control" placeholder="Tipo del contrato" />
+					</div>
+					<div class="input-form">
+						<i class="fas fa-calendar-alt"></i>
+						<input type="date" class="form-control" placeholder="Fecha de ingreso" />
+					</div>
+					<div class="input-form">
+						<i class="fas fa-calendar-alt"></i>
+						<input type="date" class="form-control" placeholder="Fecha de terminación" />
+					</div>
+				</div>
+				<div class="row col">
+					<div class="input-form">
+						<i class="fas fa-dollar-sign"></i>
+						<input type="number" class="form-control" placeholder="Salario devengado" />
+					</div>
+				</div>
+				<div class="btns">
+					<button type="button" class="btn btn-outline" onclick="window.history.back();">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Crear nuevo empleado</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

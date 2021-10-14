@@ -22,6 +22,11 @@ def admin():
     return render_template("admin.html")
 
 
+@app.route("/admin/createemployee/")
+def adminCreateEmployee():
+    return render_template("adminCreateEmployee.html", title='CrearEmpleado')
+
+
 @app.route("/user/")
 @app.route("/user/profile/")
 def userProfile():
