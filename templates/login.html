@@ -1,48 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.html' %}
 
-    <link rel='stylesheet' type='text/css' href='{{ url_for("static", filename="css/loginStyles.css") }}' />
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% block body %}
 
-    <title>Iniciar sesión</title>
-</head>
-<body>
-    <div class="login-container">
-        <div class="left">
-            <div class="main-container">
-                <h1 class="text-white">Gestión de empleados</h1>
-                <h4 class="text-white">Sistema de gestión de empleados</h4>
-            </div>
-        </div>
-        <div class="right">
-            <div class="col login-form">
-                <h3>¡Hola!</h3>
-                <form>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Correo electrónico" value="" />
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Contraseña" value="" />
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="Iniciar sesión" />
-                    </div>
-                    <div class="form-group">
-                        <a href="#" class="ForgetPwd" value="">¿Olvidaste tu contraseña?</a>
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="Registrarse" />
-                    </div>
-                </form>
-            </div>
+<div class="login-container">
+    <div class="left">
+        <div class="main-container">
+            <h1 class="text-white">Gestión de empleados</h1>
+            <h4 class="text-white">Sistema de gestión de empleados</h4>
         </div>
     </div>
-</body>
-</html>
+    <div class="right">
+        <div class="col login-form">
+            <h3 class="login-title">¡Hola!</h3>
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Correo electrónico" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Contraseña" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="Iniciar sesión" />
+                </div>
+                <div class="form-group">
+                    <a href="#" class="ForgetPwd" value="">¿Olvidaste tu contraseña?</a>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <a type="submit" class="btnSubmit" href="/register">Registrarse</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
