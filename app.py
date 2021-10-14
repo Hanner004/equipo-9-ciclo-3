@@ -21,6 +21,23 @@ def register():
         return render_template("register.html", title="Registro")
 
 
+@app.route("/users", methods=["GET"])
+def users():
+    return "USERS"
+
+
+@app.route("/users/<int:id>", methods=["GET", "POST", "PUT", "DELETE"])
+def usersCRUD(id):
+    if request.method == "GET":
+        return f"USER {id}"
+    elif request.method == "POST":
+        return f"USER {id} CREATED"
+    elif request.method == "PUT":
+        return f"USER {id} UPDATED"
+    elif request.method == "DELETE":
+        return f"USER {id} DELETED"
+
+
 @app.route("/admin/")
 def admin():
     return render_template("admin.html")
