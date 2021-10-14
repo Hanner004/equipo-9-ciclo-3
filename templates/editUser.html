@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>User</title>
+    {% endif %}
+
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/editUserStyles.css')}}"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/13e187c8c8.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container" id="background">
+      <div>
+        <h2 class="tituloPrincipal">Editar empleado</h2>
+      </div>
+      <div>
+        <p class="parr">Datos personales del empleado.</p>
+      </div>
+      <div>
+        <div class="row">
+          <div class="col">
+            <div>
+              <input placeholder="Leslie Hawkings" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/usuario.png") }}'
+                class="iconInput primeraFila primeraColumna"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <input placeholder="322 468 0795" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/telefono.png") }}'
+                class="iconInput primeraFila segundaColumna"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <input placeholder="Colombia" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/ubicacion.png") }}'
+                class="iconInput primeraFila terceraColumna"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div>
+              <input placeholder="Caquetá" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/ubicacion.png") }}'
+                class="iconInput segundaFila primeraColumna"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <input placeholder="Florencia" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/ubicacion.png") }}'
+                class="iconInput segundaFila segundaColumna"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <input placeholder="Cra 14 #2C 10" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/ubicacion.png") }}'
+                class="iconInput segundaFila terceraColumna"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div>
+              <input placeholder="leslie@hotmail.com" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/correo.png") }}'
+                class="iconInput terceraFila primeraColumna"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <input
+                placeholder="*************"
+                class="formSencillo"
+                type="password"
+              />
+              <img
+                src='{{ url_for("static", filename="img/contraseña.png") }}'
+                class="iconInput terceraFila segundaColumna"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <input
+                placeholder="*************"
+                class="formSencillo"
+                type="password"
+              />
+              <img
+                src='{{ url_for("static", filename="img/trabajo.png") }}'
+                class="iconInput terceraFila terceraColumna"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="parr">Información del contrato del empleado.</p>
+      </div>
+      <div>
+        <div class="row">
+          <div class="col">
+            <div>
+              <input placeholder="Tiempo completo" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/contraseña.png") }}'
+                class="iconInput cuartaFila primeraColumna"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <input placeholder="17 Oct, 2020" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/fecha.png") }}'
+                class="iconInput cuartaFila segundaColumna"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <input placeholder="17 Oct, 2021" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/fecha.png") }}'
+                class="iconInput cuartaFila terceraColumna"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div>
+              <input placeholder="$ 2,800" class="formSencillo" />
+              <img
+                src='{{ url_for("static", filename="img/dinero.png") }}'
+                class="iconInput quintaFila primeraColumna"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="row botoneraDerecha">
+          <div class="col">
+            <button class="botonesConBorde"><b>Cancelar</b></button>
+          </div>
+          <div class="col">
+            <button class="botonesSencillos"><b>Guardar cambios</b></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

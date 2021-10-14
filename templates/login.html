@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="login-container">
+    <div class="left">
+        <div class="main-container">
+            <h1 class="text-white">Gestión de empleados</h1>
+            <h4 class="text-white">Sistema de gestión de empleados</h4>
+        </div>
+    </div>
+    <div class="right">
+        <div class="col login-form">
+            <h3 class="login-title">¡Hola!</h3>
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Correo electrónico" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Contraseña" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="Iniciar sesión" />
+                </div>
+                <div class="form-group">
+                    <a href="#" class="ForgetPwd" value="">¿Olvidaste tu contraseña?</a>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <a type="submit" class="btnSubmit" href="/register">Registrarse</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

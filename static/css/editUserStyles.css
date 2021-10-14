@@ -1,0 +1,100 @@
+body{
+    background-color: #E5E5E5;  
+}
+.tituloPrincipal{
+    font-family: 'Mulish';
+    margin-left: 57px;
+    margin-top: 46px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+}
+.parr{
+    font-family: 'Mulish';
+    margin-left: 57px;
+    margin-top: 31px;
+}
+.formSencillo{
+    border: 0;
+    outline: none;
+    border-radius: 100px;
+    height: 59px;
+    width: 306px;
+    padding-left: 46px;
+    margin-left: 56px;
+    margin-bottom: 15px;
+}
+.iconInput{
+   opacity: 50%;
+   height: 20px;
+}
+
+.primeraFila{
+    position: absolute;
+    top: 162px;
+}
+.primeraColumna{
+    position: absolute;
+    left: 78px;
+}
+.segundaFila{
+    position: absolute;
+    top: 242px;
+}
+.segundaColumna{
+    position: absolute;
+    left: 488px;
+}
+.terceraFila{
+    position: absolute;
+    top: 316px;
+}
+.terceraColumna{
+    position: absolute;
+    left: 900px;
+}
+.cuartaFila{
+    position: absolute;
+    top: 456px;
+}
+.quintaFila{
+    position: absolute;
+    top: 532px;
+}
+.row{
+    display: flex;
+}
+.botonesConBorde{
+    font-family: "Mulish";
+    width:306px;
+    height:56px;
+    border-width: 3px;
+    border-radius: 100px;
+    border-color: #3164F4;
+    color: #3164F4;
+    border-style: solid;
+    margin: 10px;
+}
+.botonesConBorde:hover{
+    color: white;
+    background-color: #3164F4;
+}
+.botonesSencillos{
+    font-family: "Mulish";
+    width:306px;
+    height:56px;
+    border-width: 3px;
+    border-radius: 100px;
+    border-color: #3164F4;
+    background-color: #3164F4;
+    color: #ffffff;
+    border-style: solid;
+    margin: 10px;
+}
+.botonesSencillos:hover{
+    border-color: #2f58ca;
+    background-color: #2f58ca;
+    
+}
+.botoneraDerecha{
+    justify-content: end;
+}

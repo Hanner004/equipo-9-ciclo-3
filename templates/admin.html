@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href='{{ url_for("static", filename="css/adminStyles.css") }}'>
+
+  <script src="https://kit.fontawesome.com/13e187c8c8.js" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+
+  <title>Administrador</title>
+</head>
+
+<body>
+  <div class="container">
+
+    <header class='box'>
+      <h1 class="title">Dashboard</h1>
+      <nav>
+        <ul>
+          <li>
+            <i class="fas fa-users"></i>
+            <a href="#">Gestionar empleados</a>
+          </li>
+          <li>
+            <i class="fas fa-user-alt"></i>
+            <a href="#">Perfil</a>
+          </li>
+        </ul>
+        <div class="aside-menu-bottom">
+          <ul>
+            <li>
+              <i class="fas fa-sign-out-alt"></i>
+              <a href="#">Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <section class='box section-1'>
+      <div class="user_info">
+        <h3 class="username">Administrador</h3>
+        <img src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil">
+      </div>
+    </section>
+
+    <section class='box section-2'>
+      <div class="main__title">
+        <h2 class="role">Empleados</h2>
+        <div class="search">
+          <button class="btn btn-search btn-primary" title="icon-search" role="button">
+            <i class="fas fa-search search-icon"></i>
+          </button>
+          <input class="search-bar" type="search" name="search" id="search" placeholder="Buscar empleado">
+        </div>
+        <button class="btn btn-primary" onclick="location.href='createemployee'">Crear nuevo usuario</button>
+      </div>
+      <div class="main__body">
+        <table>
+          <tr>
+            <th>Nombre completo</th>
+            <th>Tipo usuario</th>
+            <th>Tipo contrato</th>
+            <th>Fecha fin contrato</th>
+            <th>Cargo</th>
+            <th>Dependencia</th>
+            <th>Salario</th>
+            <th>Acciones</th>
+          </tr>
+          <tr>
+            <td>Stefany Cárdenas Martínez</td>
+            <td>Empleado</td>
+            <td>Termindo indefinido</td>
+            <td>Dicembre 31, 2021</td>
+            <td>Desarrolladora de software</td>
+            <td>$2200000</td>
+            <td>Departamento TI</td>
+            <td>
+              <button class="btn btn-primary action-btn" title="see-more" role="button">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="btn btn-secondary action-btn" title="edit-user" role="button">
+                <i class="fas fa-user-edit"></i>
+              </button>
+              <button class="btn btn-danger action-btn" title="delete-user" role="button">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </table>
+    </section>
+  </div>
+</body>
+
+</html>
