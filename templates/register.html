@@ -13,27 +13,31 @@
         <div class="col login-form">
             <h3 class="register-title">¡Hola!</h3>
             <h5>Regístrate para empezar</h5>
-            <form action="/register" method="POST">
+            <form action="/register/" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="fullname" placeholder="Nombre completo" />
+                    <input class="form-control" type="text" name="fullname" placeholder="Nombre completo" required/>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="number" name="phone" placeholder="Teléfono" />
+                    <input class="form-control" type="number" name="phone" placeholder="Teléfono" required/>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="direction" placeholder="Dirección" />
+                    <input class="form-control" type="text" name="direction" placeholder="Dirección" required/>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="email" name="email" placeholder="Correo electrónico" />
+                    <input class="form-control" type="email" name="email" placeholder="Correo electrónico" required/>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Contraseña" />
+                    <input class="form-control" type="password" name="password" placeholder="Contraseña" required/>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="password" name="confirm" placeholder="Confirmar contraseña" />
+                    <input class="form-control" type="password" name="confirm" placeholder="Confirmar contraseña" required/>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btnSubmit" value="Registrarse" />
+                </div>
+                <hr>
+                <div class="form-group">
+                    <a type="submit" class="btnSubmit" href="/login/">Iniciar sesión</a>
                 </div>
             </form>
         </div>

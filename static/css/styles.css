@@ -88,3 +88,7 @@ h5 {
   font-weight: 600;
   text-decoration: none;
 }
+
+.swal-button--confirm {
+  background: #0062cc;
+}
