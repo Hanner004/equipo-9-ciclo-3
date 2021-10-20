@@ -165,3 +165,17 @@ div.content {
     float: none;
   }
 }
+
+/* Gestion de servicios */
+
+.services-btnSubmit {
+  font-weight: 600;
+  color: #fdfdfd;
+  background-color: #0062cc;
+  width: 60%;
+  border-radius: 1rem;
+  padding: 1.5%;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}

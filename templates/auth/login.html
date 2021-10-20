@@ -11,18 +11,8 @@
     </div>
     <div class="right">
         <div class="col login-form">
-            <h3 class="register-title">¡Hola!</h3>
-            <h5>Regístrate para empezar</h5>
-            <form action="/register/" method="POST">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="fullname" placeholder="Nombre completo" required/>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="number" name="phone" placeholder="Teléfono" required/>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="direction" placeholder="Dirección" required/>
-                </div>
+            <h3 class="login-title">¡Hola!</h3>
+            <form action="/auth/login/" method="POST">
                 <div class="form-group">
                     <input class="form-control" type="email" name="email" placeholder="Correo electrónico" required/>
                 </div>
@@ -30,14 +20,14 @@
                     <input class="form-control" type="password" name="password" placeholder="Contraseña" required/>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="password" name="confirm" placeholder="Confirmar contraseña" required/>
+                    <input type="submit" class="btnSubmit" value="Iniciar sesión" />
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btnSubmit" value="Registrarse" />
+                    <a href="#" class="ForgetPwd" value="">¿Olvidaste tu contraseña?</a>
                 </div>
                 <hr>
                 <div class="form-group">
-                    <a type="submit" class="btnSubmit" href="/login/">Iniciar sesión</a>
+                    <a type="submit" class="btnSubmit" href="/auth/register/">Registrarse</a>
                 </div>
             </form>
         </div>

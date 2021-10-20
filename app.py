@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -6,9 +6,10 @@ from werkzeug.utils import redirect
 from markupsafe import escape
 
 app = Flask(__name__)
-app.secret_key = "123"
+app.secret_key = "Equipo-9"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -24,7 +25,7 @@ class Users(db.Model):
     password = db.Column(db.String)
 
     def __repr__(self):
-        return "Usuario registrado " + str(self.id)
+        return str(self.id)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -35,32 +36,39 @@ class Users(db.Model):
 
 @app.route("/", methods=["GET"])
 def index():
-    return redirect("/login/")
+    return redirect("/auth/login/")
 
 
-@app.route("/login/", methods=["GET"])
+@app.route("/auth/login/", methods=["GET"])
 def getLogin():
-    return render_template("login.html", title="Iniciar sesión")
+    session.clear()
+    return render_template("auth/login.html", title="Iniciar sesión")
 
 
-@app.route("/login/", methods=["POST"])
+@app.route("/auth/login/", methods=["POST"])
 def postLogin():
     email = escape(request.form["email"].strip())
     password = escape(request.form["password"].strip())
     if email == None or len(email) == 0 or password == None or len(password) == 0:
         flash("ERROR: Rellenar todos los campos")
-        return render_template("login.html", title="Iniciar sesión")
+        return render_template("auth/login.html", title="Iniciar sesión")
     else:
         user = Users.query.filter_by(email=email).first()
-        if check_password_hash(user.password, password) != True:
-            flash("El inicio de sesión o la contraseña no son válidos")
-            return render_template("login.html", title="Iniciar sesión")
+        if user:
+            if check_password_hash(user.password, password) != True:
+                flash("El inicio de sesión o la contraseña no son válidos")
+                return render_template("auth/login.html", title="Iniciar sesión")
+            else:
+                flash(f"Bienvenido {user.fullname}")
+                session['id'] = user.id
+                session['role'] = "Superadministrador"
+                return redirect("/dashboard/")
         else:
-            flash(f"Bienvenido {user.fullname}")
-            return redirect("/superadmin/")
+            flash("El correo no se encuentra registrado en el sistema")
+            return render_template("auth/login.html", title="Iniciar sesión")
 
 
-@app.route("/register/", methods=["GET", "POST"])
+@app.route("/auth/register/", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         isValid = True
@@ -84,25 +92,76 @@ def register():
             isValid = False
         if isValid:
             if password == confirm:
-                user = Users(fullname=fullname, phone=phone, direction=direction, email=email)
-                user.set_password(password)
-                db.session.add(user)
-                db.session.commit()
-                flash("Usuario registrado")
-                return render_template('login.html')
+                user = Users.query.filter_by(email=email).first()
+                if user:
+                    flash("El correo ya se encuentra registrado en el sistema")
+                    return render_template("auth/register.html")
+                else:
+                    newUser = Users(fullname=fullname, phone=phone,
+                                    direction=direction, email=email)
+                    newUser.set_password(password)
+                    db.session.add(newUser)
+                    db.session.commit()
+                    flash("Usuario registrado")
+                    return render_template('auth/login.html')
             else:
                 flash("Las contraseñas no coinciden")
-                return render_template("register.html", title="Registro")
+                return render_template("auth/register.html", title="Registro")
         else:
             flash("ERROR: Rellenar todos los campos")
-            return render_template("register.html", title="Registro")
+            return render_template("auth/register.html", title="Registro")
     else:
-        return render_template("register.html", title="Registro")
+        return render_template("auth/register.html", title="Registro")
 
 
-@app.route("/<string:role>/", methods=["GET"])
-def dashboard(role):
-    return render_template("dashboard.html", role = role)
+@app.route("/dashboard/", methods=["GET"])
+def dashboard():
+    role = session['role']
+    return render_template("dashboard.html", role=role)
+
+
+@app.route("/dashboard/role/", methods=["GET"])
+def role():
+    role = session['role']
+    if role == "Superadministrador":
+        return render_template("dashboard/role.html", role=role)
+    else:
+        flash("No estás autorizado")
+        return render_template("dashboard.html", role=role)
+
+
+@app.route("/dashboard/users/", methods=["GET"])
+def users():
+    role = session['role']
+    if role == "Superadministrador":
+        return render_template("dashboard/users.html", role=role)
+    elif role == "Administrador":
+        return render_template("dashboard/users.html", role=role)
+    else:
+        flash("No estas autorizado")
+        return render_template("dashboard.html", role=role)
+
+
+@app.route("/dashboard/profile/", methods=["GET"])
+def profile():
+    role = session['role']
+    return render_template("dashboard/profile.html", role=role)
+
+
+@app.route("/dashboard/feedback/", methods=["GET"])
+def feedback():
+    role = session['role']
+    if role == "Empleado":
+        return render_template("dashboard/feedback.html", role=role)
+    else:
+        flash("No eres un empleado")
+        return render_template("dashboard.html", role=role)
+
+
+@app.route("/logout/", methods=["GET"])
+def logout():
+    session.clear()
+    return redirect("/auth/login")
 
 
 # @app.route("/users/", methods=["GET"])
@@ -126,27 +185,18 @@ def dashboard(role):
 # def admin():
 #     return render_template("admin.html")
 
-
 # @app.route("/admin/createemployee/")
 # def adminCreateEmployee():
 #     return render_template("adminCreateEmployee.html", title='CrearEmpleado')
-
-
 # @app.route("/user/")
 # @app.route("/user/profile/")
 # def userProfile():
 #     return render_template("userProfile.html", title='Perfil')
-
-
 # @app.route("/user/id/")
 # def editUser():
 #     return render_template("editUser.html", title='Editar usuario')
-
-
 # @app.route("/user/feedback/")
 # def userFeedback():
 #     return render_template("userFeedback.html", title='Retroalimentación')
-
-
 if __name__ == "__main__":
     app.run(debug=True)
