@@ -2,6 +2,28 @@
 
 {% block body %}
 
-<h1>Dashboard</h1>
+{% if role == "superadmin" %}
+    <div class="sidebar">
+        <h4 class="dashboard-title">DASHBOARD</h4>
+        <!-- <a class="active" href="#home">Home</a> -->
+        <a href="#role">Gestionar roles</a>
+        <a href="#users">Gestionar empleados</a>
+        <a class="active" href="#users/:id">Perfil</a>
+        <a href="#logout">Cerrar sesión</a>
+    </div>
+    <div class="content">
+        <div class="container-xxl">
+            <h5 style="text-align: right; padding: 2%;">Superadministrador  <img style="text-align: right;" src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil"></h5>
+            
+        </div>
+        <div style="background-color: white; padding: 2%;" class="container-md">
+            <h3><img style="text-align: right;" src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore eos culpa voluptas hic qui suscipit ipsam odio, magnam iure aut praesentium dolorem assumenda harum aspernatur. Cumque quod ad est exercitationem.</h3>
+        </div>
+    </div>
+{% elif role == "admin" %}
+<h1>ADMIN</h1>
+{% else %}
+<h1>USER</h1>
+{% endif %}
 
 {% endblock %}
