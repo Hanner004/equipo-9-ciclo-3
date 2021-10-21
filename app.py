@@ -15,14 +15,14 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
-class Users(db.Model):
-    __tablename__ = "Users"
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String)
     phone = db.Column(db.Integer)
     direction = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    profileId = db.Column(db.Integer, db.ForeignKey('profile.id'))
 
     def __repr__(self):
         return str(self.id)
@@ -32,6 +32,15 @@ class Users(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+
+class Profile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fIngreso = db.Column(db.Date)
+    tContrato = db.Column(db.String)
+    fTermino = db.Column(db.Date)
+    salario = db.Column(db.Integer)
+    user = db.relationship("User", backref="profile", uselist=False)
 
 
 @app.route("/", methods=["GET"])
@@ -53,7 +62,7 @@ def postLogin():
         flash("ERROR: Rellenar todos los campos")
         return render_template("auth/login.html", title="Iniciar sesión")
     else:
-        user = Users.query.filter_by(email=email).first()
+        user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password) != True:
                 flash("El inicio de sesión o la contraseña no son válidos")
@@ -61,7 +70,7 @@ def postLogin():
             else:
                 flash(f"Bienvenido {user.fullname}")
                 session['id'] = user.id
-                session['role'] = "Superadministrador"
+                session['role'] = "Administrador"
                 return redirect("/dashboard/")
         else:
             flash("El correo no se encuentra registrado en el sistema")
@@ -92,13 +101,17 @@ def register():
             isValid = False
         if isValid:
             if password == confirm:
-                user = Users.query.filter_by(email=email).first()
+                user = User.query.filter_by(email=email).first()
                 if user:
                     flash("El correo ya se encuentra registrado en el sistema")
                     return render_template("auth/register.html")
                 else:
-                    newUser = Users(fullname=fullname, phone=phone,
-                                    direction=direction, email=email)
+                    # datos-perfil
+                    newProfile = Profile(salario= 1000)
+                    db.session.add(newProfile)
+                    db.session.commit()
+                    # datos-usuario
+                    newUser = User(fullname=fullname, phone=phone, direction=direction, email=email, profileId= newProfile.id)
                     newUser.set_password(password)
                     db.session.add(newUser)
                     db.session.commit()
