@@ -22,6 +22,24 @@ instalar los paquetes necesarios en el entorno virtual
 pip install -r requirements.txt
 ```
 
+## Migrations
+
+```
+https://flask-migrate.readthedocs.io/en/latest/
+
+Iniciar
+flask db init
+
+migracion
+flask db migrate
+
+Actualiza la base de datos. Si no se da, entonces se asume.revision"head"
+flask db upgrade
+
+Degrada la base de datos. Si no se da, entonces se asume.revision-1
+flask db downgrade
+```
+
 ## Documentation
 
 ```

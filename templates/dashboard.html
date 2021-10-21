@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="sidebar">
+    <h4 class="dashboard-title">DASHBOARD</h4>
+    {% if role == "Superadministrador" %}
+    <a href="/dashboard/role">Gestionar roles</a>
+    {% endif %}
+    {% if role == "Superadministrador" or role == "Administrador" %}
+    <a href="/dashboard/users">Gestionar empleados</a>
+    {% endif %}
+    {% if role == "Empleado" %}
+    <a href="/dashboard/feedback">Retroalimentación</a>
+    {% endif %}
+    <a href="/dashboard/profile">Perfil</a>
+    <a href="/auth/login">Cerrar sesión</a>
+</div>
+
+<div class="content">
+    <div class="container-xxl">
+        <h5 style="text-align: right; padding: 2%;">{{role}}&nbsp;&nbsp;<img style="text-align: right;" src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil"></h5>
+    </div>
+    <div style="background-color: white; padding: 2%;" class="container-md">
+        <h3>&nbsp;&nbsp;&nbsp;<img style="text-align: left;" src='{{ url_for("static", filename="img/profile.png") }}' alt="Imágen de perfil">&nbsp; Gestión de empleados</h3>
+        <p style="padding: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, totam dolores voluptatum quo aut corrupti consectetur? Fugit quisquam blanditiis iste totam iure tempore voluptatum illo ut. Dolor consectetur maxime tempora.
+        Quo laboriosam consectetur deleniti repudiandae nemo ab aspernatur nulla aut sint vitae minus tempora, fuga perferendis velit et fugiat corrupti omnis, tempore totam vel? Saepe quidem eveniet quisquam at illo!
+        Recusandae, iste ullam, rem eum vero voluptatibus non atque corrupti quis obcaecati dignissimos iure quos fugit autem delectus nemo maxime vitae aspernatur magni molestias dolorum sunt minima aliquid? In, commodi!
+        Ullam animi, deleniti maxime quam tempore eos inventore incidunt nihil, nam eaque iusto repudiandae accusantium, iure quia in aut perspiciatis obcaecati. Quaerat temporibus, ratione amet praesentium cupiditate numquam tempore atque.
+        Molestias reiciendis quis eius totam placeat, sint consequuntur harum esse, iure, facilis itaque! Consectetur corporis quas necessitatibus. Pariatur, accusamus eligendi! Accusamus debitis aliquam nulla aut? Tempora, non. Illo, distinctio reprehenderit.</p>
+    </div>
+</div>
+
+{% endblock %}
