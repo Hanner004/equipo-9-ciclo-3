@@ -34,18 +34,18 @@
                                 <th scope="col">Correo electrónico</th>
                                 <th scope="col">Teléfono</th>
                                 <th scope="col">Dirección</th>
-                                <th scope="col">Cargo</th>
-                                <th scope="col">Salario</th>
+                                <th scope="col">Rol</th>
+                                <!-- <th scope="col">Salario</th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Hanner De La Hoz</td>
-                                <td>haner@gmail.com</td>
-                                <td>32222222</td>
-                                <td>Carrera 8</td>
-                                <td>Desarrollador</td>
-                                <td>1.200.000</td>
+                                <td>{{profile.fullname}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{profile.phone}}</td>
+                                <td>{{profile.direction}}</td>
+                                <td>{{role}}</td>
+                                <!-- <td>1.200.000</td> -->
                             </tr>
                         </tbody>
                     </table>

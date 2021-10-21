@@ -24,7 +24,7 @@
             <div class="container-xxl">
                 <div class="row">
                     <div class="col" style="text-align: left;"><h1>Empleados</h1></div>
-                    <div class="col" style="text-align: right;"><button class="services-btnSubmit" type="submit">Crear nuevo empleado</button></div>
+                    <div class="col" style="text-align: right;"><a href="/dashboard/users/create" class="services-btnSubmit" type="submit">Crear nuevo empleado</a></div>
                 </div>
                 <br>
                 <div class="row" style="padding: 1%;">
@@ -32,29 +32,27 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nombre del empleado</th>
+                                <th scope="col">Nombre del usuario</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Dirección</th>
                                 <th scope="col">Gestionar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Hanner De La Hoz</td>
-                                <td>&nbsp;&nbsp;&nbsp;<img style="height: 35px; width: 35px;" src='{{ url_for("static", filename="img/delete.png") }}'></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Juan</td>
-                                <td>&nbsp;&nbsp;&nbsp;<img style="height: 35px; width: 35px;" src='{{ url_for("static", filename="img/delete.png") }}'></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Harold</td>
-                                <td>&nbsp;&nbsp;&nbsp;<img style="height: 35px; width: 35px;" src='{{ url_for("static", filename="img/delete.png") }}'></td>
-                            </tr>
+                            {% if profile %}
+                                {% for users in profile %}
+                                    <tr>
+                                        <th scope="row">{{users.id}}</th>
+                                        <td>{{users.fullname}}</td>
+                                        <td>{{users.phone}}</td>
+                                        <td>{{users.direction}}</td>
+                                        <td>&nbsp;&nbsp;&nbsp;<img style="height: 35px; width: 35px;" src='{{ url_for("static", filename="img/delete.png") }}'></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
                         </tbody>
                     </table>
-                </div>
+                </div>  
             </div>
         </div>
     </div>

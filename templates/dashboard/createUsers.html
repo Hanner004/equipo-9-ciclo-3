@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="sidebar">
+        <h4 class="dashboard-title">DASHBOARD</h4>
+        {% if role == "Superadministrador" %}
+        <a href="/dashboard/role">Gestionar roles</a>
+        {% endif %}
+        {% if role == "Superadministrador" or role == "Administrador" %}
+        <a class="active" href="/dashboard/users">Gestionar empleados</a>
+        {% endif %}
+        {% if role == "Empleado" %}
+        <a href="/dashboard/feedback">Retroalimentación</a>
+        {% endif %}
+        <a href="/dashboard/profile">Perfil</a>
+        <a href="/auth/login">Cerrar sesión</a>
+    </div>
+
+    <div class="content">
+        <div class="container-xl">
+            <h5 style="text-align: right; padding: 2%;">{{role}}&nbsp;&nbsp;<img style="text-align: right;" src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil"></h5>
+        </div>
+        <div style="background-color: white; padding: 2%;" class="container-md">
+            <div class="container">
+                <div class="row">
+                    <div class="col" style="text-align: left;"><h1 style="text-align: center;">Crear nuevo empleado</h1></div>
+                </div>
+                <br>
+                <div style="padding: 1%;">
+                    <form action="/dashboard/users/create/" method="POST">
+                        <div class="container">
+                            <div class="row">
+                                <input class="form-control col" type="text" name="fullname" placeholder="Nombre completo" required/> &nbsp;
+                                <input class="form-control col" type="number" name="phone" placeholder="Teléfono" required/>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="direction" placeholder="Dirección" required/>
+                            </div>
+                            <div class="form-group">
+                                <label> Fecha de ingreso</label>
+                                <input class="form-control" type="date" name="fIngreso" placeholder="Fecha de ingreso" required/>
+                            </div>
+                            <div class="form-group">
+                                <label> Fecha de termino de contrato</label>
+                                <input class="form-control" type="date" name="fTermino" placeholder="Fecha de termino de contrato" required/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="tContrato" placeholder="Tipo de contrato" required/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="number" name="salario" placeholder="Salario" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Rol</label>
+                                <select class="form-control" name="selectRol">
+                                    <option value="Empleado">Empleado</option>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Superadministrador">Superadministrador</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <input class="form-control col" type="email" name="email" placeholder="Correo electrónico" required/> &nbsp;
+                                <input class="form-control col" type="password" name="password" placeholder="Contraseña" required/>&nbsp;
+                                <input class="form-control col" type="password" name="confirm" placeholder="Confirmar contraseña" required/>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input style="background-color: #0062cc; color: #fdfdfd;" type="submit" class="btnSubmit" value="Crear" /><br><br>
+                                <a style="background-color: #0062cc; color: #fdfdfd;" type="submit" class="btnSubmit" href="/dashboard/users/create">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
