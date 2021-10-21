@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="sidebar">
+        <h4 class="dashboard-title">DASHBOARD</h4>
+        {% if role == "Superadministrador" %}
+        <a href="/dashboard/role">Gestionar roles</a>
+        {% endif %}
+        {% if role == "Superadministrador" or role == "Administrador" %}
+        <a href="/dashboard/users">Gestionar empleados</a>
+        {% endif %}
+        {% if role == "Empleado" %}
+        <a href="/dashboard/feedback">Retroalimentación</a>
+        {% endif %}
+        <a class="active" href="/dashboard/profile">Perfil</a>
+        <a href="/auth/login">Cerrar sesión</a>
+    </div>
+
+    <div class="content">
+        <div class="container-xxl">
+            <h5 style="text-align: right; padding: 2%;">{{role}}&nbsp;&nbsp;<img style="text-align: right;" src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil"></h5>
+        </div>
+        <div style="background-color: white; padding: 2%;" class="container-md">
+            <div class="container-xxl">
+                <div class="row">
+                    <div class="col" style="text-align: left;"><h1>Perfil</h1></div>
+                </div>
+                <br>
+                <div class="row" style="padding: 1%;">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre completo</th>
+                                <th scope="col">Correo electrónico</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Dirección</th>
+                                <th scope="col">Rol</th>
+                                <!-- <th scope="col">Salario</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{profile.fullname}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{profile.phone}}</td>
+                                <td>{{profile.direction}}</td>
+                                <td>{{role}}</td>
+                                <!-- <td>1.200.000</td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

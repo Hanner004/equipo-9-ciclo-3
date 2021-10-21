@@ -12,12 +12,12 @@
     <div class="right">
         <div class="col login-form">
             <h3 class="login-title">¡Hola!</h3>
-            <form action="/login" method="POST">
+            <form action="/auth/login/" method="POST">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Correo electrónico" value="" />
+                    <input class="form-control" type="email" name="email" placeholder="Correo electrónico" required/>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Contraseña" value="" />
+                    <input class="form-control" type="password" name="password" placeholder="Contraseña" required/>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btnSubmit" value="Iniciar sesión" />
@@ -27,7 +27,7 @@
                 </div>
                 <hr>
                 <div class="form-group">
-                    <a type="submit" class="btnSubmit" href="/register">Registrarse</a>
+                    <a type="submit" class="btnSubmit" href="/auth/register/">Registrarse</a>
                 </div>
             </form>
         </div>
