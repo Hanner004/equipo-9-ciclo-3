@@ -9,8 +9,6 @@ html {
   margin: 0;
 }
 
-/* login/register */
-
 .left,
 .right {
   display: inline-block;
@@ -76,6 +74,7 @@ h5 {
   text-align: center;
 }
 
+
 .login-form .btnSubmit {
   font-weight: 600;
   color: #fdfdfd;
@@ -88,94 +87,4 @@ h5 {
   color: rgb(0, 0, 0);
   font-weight: 600;
   text-decoration: none;
-}
-
-.swal-button--confirm {
-  background: #0062cc;
-}
-
-/* dashboard */
-
-.container-md {
-  border-radius: 1em;
-}
-
-.content {
-  background-color: #f1f1f1;
-}
-
-.dashboard-title {
-  padding: 10%;
-  text-align: center;
-  font-style: italic;
-  color: white;
-}
-
-.sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #0062cc;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-}
-
-.sidebar a {
-  display: block;
-  color: white;
-  padding: 16px;
-  text-decoration: none;
-  text-align: center;
-}
-
-.sidebar a.active {
-  background-color: #5299fe;
-  color: white;
-}
-
-.sidebar a:hover:not(.active) {
-  background-color: #5299fe;
-  color: white;
-}
-
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
-}
-
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {
-    float: left;
-  }
-  div.content {
-    margin-left: 0;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
-}
-
-/* Gestion de servicios */
-
-.services-btnSubmit {
-  font-weight: 600;
-  color: #fdfdfd;
-  background-color: #0062cc;
-  width: 60%;
-  border-radius: 1rem;
-  padding: 1.5%;
-  border: none;
-  cursor: pointer;
-  text-align: center;
 }
