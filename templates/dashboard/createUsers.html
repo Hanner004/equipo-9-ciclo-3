@@ -4,26 +4,43 @@
     <div class="sidebar">
         <h4 class="dashboard-title">DASHBOARD</h4>
         {% if role == "Superadministrador" %}
-        <a href="/dashboard/role">Gestionar roles</a>
+        <div class="item">
+            <i class="fas fa-id-card-alt"></i>
+            <a href="/dashboard/role">Gestionar roles</a>
+        </div>
         {% endif %}
         {% if role == "Superadministrador" or role == "Administrador" %}
-        <a class="active" href="/dashboard/users">Gestionar empleados</a>
+        <div class="item active">
+            <i class="fas fa-users"></i>
+            <a href="/dashboard/users">Gestionar empleados</a>
+        </div>
         {% endif %}
         {% if role == "Empleado" %}
-        <a href="/dashboard/feedback">Retroalimentación</a>
+        <div class="item">
+            <i class="fas fa-chart-bar"></i>
+            <a href="/dashboard/feedback">Retroalimentación</a>
+        </div>
         {% endif %}
-        <a href="/dashboard/profile">Perfil</a>
-        <a href="/auth/login">Cerrar sesión</a>
+        <div class="item">
+            <i class="fas fa-user-alt"></i>
+            <a href="/dashboard/profile">Perfil</a>
+        </div>
+        <div class="item">
+            <i class="fas fa-sign-out-alt"></i>
+            <a href="/auth/login">Cerrar sesión</a>
+        </div>
     </div>
 
     <div class="content">
         <div class="container-xl">
             <h5 style="text-align: right; padding: 2%;">{{role}}&nbsp;&nbsp;<img style="text-align: right;" src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil"></h5>
         </div>
-        <div style="background-color: white; padding: 2%;" class="container-md">
+        <div class="container-md p-4 mb-5">
             <div class="container">
                 <div class="row">
-                    <div class="col" style="text-align: left;"><h1 style="text-align: center;">Crear nuevo empleado</h1></div>
+                    <div class="col" style="text-align: left;">
+                        <h1 style="text-align: center;">Crear nuevo empleado</h1>
+                    </div>
                 </div>
                 <br>
                 <div style="padding: 1%;">
