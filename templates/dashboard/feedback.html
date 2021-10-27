@@ -5,29 +5,78 @@
 <div class="sidebar">
     <h4 class="dashboard-title">DASHBOARD</h4>
     {% if role == "Superadministrador" %}
-    <a href="/dashboard/role">Gestionar roles</a>
+    <div class="item">
+        <i class="fas fa-id-card-alt"></i>
+        <a href="/dashboard/role">Gestionar roles</a>
+    </div>
     {% endif %}
     {% if role == "Superadministrador" or role == "Administrador" %}
-    <a href="/dashboard/users">Gestionar empleados</a>
+    <div class="item">
+        <i class="fas fa-users"></i>
+        <a href="/dashboard/users">Gestionar empleados</a>
+    </div>
     {% endif %}
     {% if role == "Empleado" %}
-    <a href="/dashboard/feedback">Retroalimentación</a>
+    <div class="item active">
+        <i class="fas fa-chart-bar"></i>
+        <a href="/dashboard/feedback">Retroalimentación</a>
+    </div>
     {% endif %}
-    <a href="/dashboard/profile">Perfil</a>
-    <a href="/auth/login">Cerrar sesión</a>
+    <div class="item">
+        <i class="fas fa-user-alt"></i>
+        <a href="/dashboard/profile">Perfil</a>
+    </div>
+    <div class="item">
+        <i class="fas fa-sign-out-alt"></i>
+        <a href="/auth/login">Cerrar sesión</a>
+    </div>
 </div>
 
 <div class="content">
     <div class="container-xxl">
-        <h5 style="text-align: right; padding: 2%;">{{role}}&nbsp;&nbsp;<img style="text-align: right;" src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil"></h5>
+        <h5 style="text-align: right; padding: 2%;">
+            {{profile.fullname}}&nbsp;&nbsp;
+            <img 
+                class="text-right"
+                src='{{ url_for("static", filename="img/profile-pic.png") }}' 
+                alt="Imágen de perfil"
+            />
+        </h5>
     </div>
-    <div style="background-color: white; padding: 2%;" class="container-md">
-        <h3>&nbsp;&nbsp;&nbsp;&nbsp;<img src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil">&nbsp; Mi retroalimentación</h3>
-        <p style="padding: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, totam dolores voluptatum quo aut corrupti consectetur? Fugit quisquam blanditiis iste totam iure tempore voluptatum illo ut. Dolor consectetur maxime tempora.
-        Quo laboriosam consectetur deleniti repudiandae nemo ab aspernatur nulla aut sint vitae minus tempora, fuga perferendis velit et fugiat corrupti omnis, tempore totam vel? Saepe quidem eveniet quisquam at illo!
-        Recusandae, iste ullam, rem eum vero voluptatibus non atque corrupti quis obcaecati dignissimos iure quos fugit autem delectus nemo maxime vitae aspernatur magni molestias dolorum sunt minima aliquid? In, commodi!
-        Ullam animi, deleniti maxime quam tempore eos inventore incidunt nihil, nam eaque iusto repudiandae accusantium, iure quia in aut perspiciatis obcaecati. Quaerat temporibus, ratione amet praesentium cupiditate numquam tempore atque.
-        Molestias reiciendis quis eius totam placeat, sint consequuntur harum esse, iure, facilis itaque! Consectetur corporis quas necessitatibus. Pariatur, accusamus eligendi! Accusamus debitis aliquam nulla aut? Tempora, non. Illo, distinctio reprehenderit.</p>
+    <div class="container-md p-4 mb-5">
+        {% if feedbacks %}
+            {% for user in feedbacks %}
+                <div class="row">
+                    <div class="col-1 pic-feedback">
+                        <img src="/static/img/profile.png" alt="Imágen User-profile">
+                    </div>
+                    <div class="col-11"> 
+                        <div class="row info-feedback">
+                            <div>
+                                <h4 class="m-0">Empresa</h4>
+                                <div class="name_loc">
+                                    <i class="fas fa-user-alt"></i>
+                                    <p>{{manager[loop.index0].fullname}}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p>{{user.date}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="feedback_text">
+                                <h5>
+                                    {{user.text}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            {% endfor %}
+        {% else %}
+            Sin comentarios
+        {% endif %}
     </div>
 </div>
 

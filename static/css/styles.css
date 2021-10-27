@@ -98,6 +98,7 @@ h5 {
 
 .container-md {
   border-radius: 1em;
+  background-color: white;
 }
 
 .content {
@@ -121,28 +122,36 @@ h5 {
   overflow: auto;
 }
 
+.sidebar .item{
+  display: flex;
+  align-items: center;
+  padding: 15px 0px 15px 15px;
+}
+
+.sidebar .item.active,
+.sidebar .item:hover {
+  color: white;
+  text-decoration: none;
+  background-color: #5299fe;
+}
+
 .sidebar a {
   display: block;
   color: white;
-  padding: 16px;
-  text-decoration: none;
-  text-align: center;
-}
-
-.sidebar a.active {
-  background-color: #5299fe;
-  color: white;
+  text-align: justify;
+  padding: 0px 10px;
 }
 
 .sidebar a:hover:not(.active) {
-  background-color: #5299fe;
   color: white;
+  text-decoration: none;
 }
 
 div.content {
   margin-left: 200px;
   padding: 1px 16px;
-  height: 1000px;
+  min-height: 100%;
+  height: auto;
 }
 
 @media screen and (max-width: 700px) {
@@ -178,4 +187,112 @@ div.content {
   border: none;
   cursor: pointer;
   text-align: center;
+}
+
+.row .btn-NewEmple a{
+  text-decoration: none;
+  color: white;
+}
+
+/* User Profile */
+
+.pic-profile {
+  text-align: center;
+}
+
+.pic-profile img{
+  width: 9rem;
+  height: 9rem;
+}
+
+.info-profile{
+  padding: 30px 10px;
+}
+
+.name_loc{
+  display: flex;
+  align-items: center;
+}
+
+.col-9 i, 
+.col-9 p,
+.col-11 i, 
+.col-11 p{
+  color: gray; 
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  padding-right: 10px;
+}
+
+.col-6 h5{
+  color: #444;
+  text-align: justify;
+  padding: 0 0 5px 10px;
+}
+
+.col-6 .data{
+  width: 90%;
+  height: 50px;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  border-radius: 25px;
+  background-color: #eeeeee;
+}
+
+/* User feedback */
+
+.pic-feedback{
+  text-align: center;
+}
+
+.pic-feedback img{
+  width: 3rem;
+  height: 3rem;
+}
+
+.info-feedback{
+  display: flex;
+  padding: 10px 10px;
+  margin-right: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feedback_text{
+  height: 10em;
+  width: 100%;
+  padding: 20px;
+  margin: 0px 10px;
+  border-radius: 15px;
+  background-color: #eeeeee;
+  overflow: auto;
+}
+
+.feedback_text h5{
+  color: #444;
+  font-size: medium;
+  font-weight: normal;
+  text-align: justify;
+}
+
+
+/* Create Feedback */
+
+.fas {
+  font-size: 12px;
+  color: white;
+}
+
+.btn-feedback {
+  border: none;
+  padding: 5px;
+  width: 8em;
+  cursor: pointer;
+  font-weight: 600;
+  color: #fdfdfd;
+  text-align: center;
+  border-radius: 1rem;
+  background-color: #0062cc;
 }

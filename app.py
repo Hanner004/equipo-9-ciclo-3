@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, flash, session
+from flask import Flask, render_template, request, flash, session, url_for
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func, and_
 from flask_migrate import Migrate
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import redirect
@@ -42,6 +43,14 @@ class Profile(db.Model):
     fTermino = db.Column(db.String)
     salario = db.Column(db.Integer)
     user = db.relationship("User", backref="profile", uselist=False)
+
+
+class Feedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_employee = db.Column(db.Integer, db.ForeignKey('profile.id'))
+    id_manager = db.Column(db.Integer, db.ForeignKey('profile.id'))
+    text = db.Column(db.String)
+    date = db.Column(db.Date, server_default=func.current_date())
 
 
 class Role(db.Model):
@@ -176,18 +185,59 @@ def role():
 @app.route("/dashboard/users/", methods=["GET"])
 def users():
     role = session['role']
-    profile = Profile.query.all()
     roles = Role.query.all()
-    users = User.query.all()
-    print(profile)
     if role == "Superadministrador":
-        return render_template("dashboard/users.html", role=role, profile= profile, roles = roles, allusers=users)
+        users = User.query.filter(User.roleId != 1)
+        if users.count() != 0:
+            profile = []
+            for user in users:
+                profile += Profile.query.filter_by(id=user.profileId)
+            return render_template("dashboard/users.html", role=role, profile= profile, roles = roles, allusers=users)
+        else:
+            return render_template("dashboard/users.html", role=role, roles= roles)
     elif role == "Administrador":
-        return render_template("dashboard/users.html", role=role, profile= profile, roles= roles, allusers=users)
+        users = User.query.filter_by(roleId=3)
+        if users.count() != 0:
+            profile = []
+            for user in users:
+                profile += Profile.query.filter_by(id=user.profileId)
+            return render_template("dashboard/users.html", role=role, profile= profile, roles= roles, allusers=users)
+        else:
+            return render_template("dashboard/users.html", role=role, roles= roles)
     else:
         flash("No estas autorizado")
         return render_template("dashboard.html", role=role)
-    
+
+
+@app.route("/dashboard/users/feedback/<int:idEmployee>", methods=["GET", "POST"])
+def createFeedback(idEmployee):
+    id = session['id']
+    role = session['role']
+    employee = Profile.query.filter_by(id=idEmployee).first()
+    if request.method == "POST":
+        usermanager = User.query.filter_by(id=id).first()
+        profilemanager = Profile.query.filter_by(id=usermanager.profileId).first()
+        text = escape(request.form["text"])
+        newFeedback = Feedback(id_employee=idEmployee, id_manager=profilemanager.id, text=text)
+        db.session.add(newFeedback)
+        db.session.commit()
+        flash("Retroalimentación enviada")
+        return redirect(url_for('users'))
+    return render_template("dashboard/createFeedback.html", role=role, employee=employee)
+
+
+@app.route("/dashboard/users/delete/<int:idEmployee>", methods=["GET", "POST"])
+def deleteUsers(idEmployee):
+    id = session['id']
+    role = session['role']
+    profileEmployee = Profile.query.filter_by(id=idEmployee).first()
+    userEmployee = User.query.filter_by(profileId=profileEmployee.id).first()
+    db.session.delete(profileEmployee)
+    db.session.delete(userEmployee)
+    db.session.commit()
+    flash("Usuario eliminado")
+    return redirect(url_for('users'))
+
 
 @app.route("/dashboard/users/create/", methods=["GET", "POST"])
 def createUsers():
@@ -223,12 +273,11 @@ def createUsers():
                 newUser.set_password(password)
                 db.session.add(newUser)
                 db.session.commit()
-                profile = Profile.query.all()
                 flash("Usuario registrado")
-                return render_template('dashboard/users.html', role=role, profile= profile, roles = roles, allusers=users)
+                return redirect(url_for('users'))
         else:
             flash("Las contraseñas no coinciden")
-            return render_template("dashboard/createUsers.html")
+            return redirect(url_for('createUsers'))
 
     else:
         role = session['role']
@@ -255,7 +304,17 @@ def profile():
 def feedback():
     role = session['role']
     if role == "Empleado":
-        return render_template("dashboard/feedback.html", role=role)
+        id = session['id']
+        user = User.query.filter_by(id=id).first()
+        profile = Profile.query.filter_by(id=user.profileId).first()
+        feedbacks = Feedback.query.filter_by(id_employee=profile.id)
+        if feedbacks.count() != 0:
+            managers = []
+            for i in feedbacks:
+                managers += Profile.query.filter_by(id=i.id_manager)
+            return render_template("dashboard/feedback.html", role=role, profile=profile, feedbacks=feedbacks, manager=managers)
+        else: 
+            return render_template("dashboard/feedback.html", role=role, profile=profile)
     else:
         flash("No eres un empleado")
         return render_template("dashboard.html", role=role)
@@ -277,20 +336,9 @@ def logout():
 #     return render_template("adminCreateEmployee.html", title='CrearEmpleado')
 
 
-# @app.route("/user/")
-# @app.route("/user/profile/")
-# def userProfile():
-#     return render_template("userProfile.html", title='Perfil')
-
-
 # @app.route("/user/id/")
 # def editUser():
 #     return render_template("editUser.html", title='Editar usuario')
-
-
-# @app.route("/user/feedback/")
-# def userFeedback():
-#     return render_template("userFeedback.html", title='Retroalimentación')
 
 
 if __name__ == "__main__":
