@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="sidebar">
+  <h4 class="dashboard-title">DASHBOARD</h4>
+  {% if role == "Superadministrador" %}
+  <a href="/dashboard/role">Gestionar roles</a>
+  {% endif %}
+  {% if role == "Superadministrador" or role == "Administrador" %}
+  <a class="active" href="/dashboard/users">Gestionar empleados</a>
+  {% endif %}
+  {% if role == "Empleado" %}
+  <a href="/dashboard/feedback">Retroalimentación</a>
+  {% endif %}
+  <a href="/dashboard/profile">Perfil</a>
+  <a href="/auth/login">Cerrar sesión</a>
+</div>
+
+<div class="container">
+  <section class='box section-1'>
+    <div class="user_info">
+      <h3 class="username">{{role}}</h3>
+      <img src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil">
+    </div>
+  </section>
+
+  <section class='box section-2'>
+    <div class="main__title">
+      <h2 class="role">Empleados</h2>
+      <!-- <div class="search">
+        <button class="btn btn-search btn-primary" title="icon-search" role="button">
+            <i class="fas fa-search search-icon"></i>
+          </button>
+          <input class="search-bar" type="search" name="search" id="search" placeholder="Buscar empleado">
+        </div> -->
+
+      <a href="/dashboard/users/create" class="btn btn-primary link" role="button">Crear nuevo empleado</a>
+
+      <!-- <button class="btn btn-primary" onclick="location.href='createemployee'">Crear nuevo usuario</button> -->
+    </div>
+    <div class="main__body">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre completo</th>
+            <th>Correo electrónico</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Tipo contrato</th>
+            <th>Fecha Inicio</th>
+            <th>Salario</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if profile %}
+          {% for users in profile %}
+          <tr>
+            <th>{{users.id}}</th>
+            <td>{{users.fullname}}</td>
+            <td>{{users.email}}</td>
+            <td>{{users.phone}}</td>
+            <td>{{users.direction}}</td>
+            <td>{{users.tContrato}}</td>
+            <td>{{users.fIngreso}}</td>
+            <td>{{users.salario}}</td>
+            <td>
+              <div class="btns">
+                <button class="btn btn-primary action-btn" title="see-more" role="button">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="btn btn-secondary action-btn" title="edit-user" role="button">
+                  <i class="fas fa-user-edit"></i>
+                </button>
+                <button class="btn btn-danger action-btn" title="delete-user" role="button">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+  </section>
+</div>
+{% endblock %}

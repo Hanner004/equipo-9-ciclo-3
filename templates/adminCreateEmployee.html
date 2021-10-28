@@ -1,94 +1,90 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends 'base.html' %}
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block body %}
 
-	<link rel="stylesheet" href='{{ url_for("static", filename="css/createEmployee.css") }}'>
+<div class="sidebar">
+	<h4 class="dashboard-title">DASHBOARD</h4>
+	{% if role == "Superadministrador" %}
+	<a href="/dashboard/role">Gestionar roles</a>
+	{% endif %}
+	{% if role == "Superadministrador" or role == "Administrador" %}
+	<a class="active" href="/dashboard/users">Gestionar empleados</a>
+	{% endif %}
+	{% if role == "Empleado" %}
+	<a href="/dashboard/feedback">Retroalimentación</a>
+	{% endif %}
+	<a href="/dashboard/profile">Perfil</a>
+	<a href="/auth/login">Cerrar sesión</a>
+</div>
 
-	<script src="https://kit.fontawesome.com/13e187c8c8.js" crossorigin="anonymous"></script>
-
-	<title>Crear empleado</title>
-</head>
-
-<body>
-	<div class="container">
-		<h2 class="title">Crear empleado</h2>
-		<div class="form-container">
-			<form class="form">
-				<h3 class="subtitle">Ingresa los datos personales del empleado.</h3>
-				<div class="row">
-					<div class="input-form">
-						<i class="fas fa-user"></i>
-						<input type="text" class="form-control" placeholder="Nombre completo" />
-					</div>
-					<div class="input-form">
-						<i class="fas fa-phone"></i>
-						<input type="tel" class="form-control" placeholder="Teléfono" />
-					</div>
-					<div class="input-form">
-						<i class="fas fa-map-marker-alt"></i>
-						<input type="text" class="form-control" placeholder="País" />
-					</div>
+<div class="container">
+	<h2 class="title">Crear empleado</h2>
+	<div class="form-container">
+		<form class="form" action="/dashboard/users/create/" method="post">
+			<h3 class="subtitle">Ingresa los datos personales del empleado.</h3>
+			<div class="row">
+				<div class="input-form">
+					<i class="fas fa-user"></i>
+					<input name="fullname" type="text" class="form-control" required placeholder="Nombre completo" />
 				</div>
-				<div class="row">
-					<div class="input-form">
-						<i class="fas fa-map-marker-alt"></i>
-						<input type="text" class="form-control" placeholder="Departamento" />
-					</div>
-					<div class="input-form">
-						<i class="fas fa-map-marker-alt"></i>
-						<input type="text" class="form-control" placeholder="Ciudad" />
-					</div>
-					<div class="input-form">
-						<i class="fas fa-map-marker-alt"></i>
-						<input type="text" class="form-control" placeholder="Dirección" />
-					</div>
+				<div class="input-form">
+					<i class="fas fa-phone"></i>
+					<input name="phone" type="tel" class="form-control" required placeholder="Teléfono" />
 				</div>
-				<div class="row">
-					<div class="input-form">
-						<i class="fas fa-envelope"></i>
-						<input type="email" class="form-control" placeholder="Correo electrónico" />
-					</div>
-					<div class="input-form">
-						<i class="fas fa-lock"></i>
-						<input type="password" class="form-control" placeholder="Contraseña" />
-					</div>
-					<div class="input-form">
-						<i class="fas fa-lock"></i>
-						<input type="password" class="form-control" placeholder="Confirmar Contraseña" />
-					</div>
+			</div>
+			<div class="row">
+				<div class="input-form">
+					<i class="fas fa-map-marker-alt"></i>
+					<input name="direction" type="text" class="form-control" required placeholder="Dirección" />
 				</div>
-				<h3 class="subtitle">Ingresa la información del contrato del empleado.</h3>
-				<div class="row">
-					<div class="input-form">
-						<i class="fas fa-suitcase"></i>
-						<input type="text" class="form-control" placeholder="Tipo del contrato" />
-					</div>
-					<div class="input-form">
-						<i class="fas fa-calendar-alt"></i>
-						<input type="date" class="form-control" placeholder="Fecha de ingreso" />
-					</div>
-					<div class="input-form">
-						<i class="fas fa-calendar-alt"></i>
-						<input type="date" class="form-control" placeholder="Fecha de terminación" />
-					</div>
+			</div>
+			<div class="row">
+				<div class="input-form">
+					<i class="fas fa-envelope"></i>
+					<input name="email" type="email" class="form-control" required placeholder="Correo electrónico" />
 				</div>
-				<div class="row col">
-					<div class="input-form">
-						<i class="fas fa-dollar-sign"></i>
-						<input type="number" class="form-control" placeholder="Salario devengado" />
-					</div>
+				<div class="input-form">
+					<i class="fas fa-lock"></i>
+					<input name="password" type="password" class="form-control" required placeholder="Contraseña" />
 				</div>
-				<div class="btns">
-					<button type="button" class="btn btn-outline" onclick="window.history.back();">Cancelar</button>
-					<button type="submit" class="btn btn-primary">Crear nuevo empleado</button>
+				<div class="input-form">
+					<i class="fas fa-lock"></i>
+					<input name="confirm" type="password" class="form-control" required placeholder="Confirmar Contraseña" />
 				</div>
-			</form>
-		</div>
+			</div>
+			<h3 class="subtitle">Ingresa la información del contrato del empleado.</h3>
+			<div class="row">
+				<div class="input-form">
+					<i class="fas fa-suitcase"></i>
+					<input name="tContrato" type="text" class="form-control" required placeholder="Tipo del contrato" />
+				</div>
+				<div class="input-form">
+					<i class="fas fa-calendar-alt"></i>
+					<input name="fIngreso" type="date" class="form-control" required placeholder="Fecha de ingreso" />
+				</div>
+				<div class="input-form">
+					<i class="fas fa-calendar-alt"></i>
+					<input name="fTermino" type="date" class="form-control" required placeholder="Fecha de terminación" />
+				</div>
+			</div>
+			<div class="row col">
+				<div class="input-form">
+					<select class="form-control" name="selectRol" id="">
+						<option value="Empleado">Empleado</option>
+						<option value="Administrador">Administrador</option>
+						<option value="Superadministrador">Superadministrador</option>
+					</select>
+				</div>
+				<div class="input-form">
+					<i class="fas fa-dollar-sign"></i>
+					<input name="salario" type="number" class="form-control" required placeholder="Salario devengado" />
+				</div>
+			</div>
+			<div class="btns">
+				<button type="button" class="btn btn-outline" onclick="window.history.back();">Cancelar</button>
+				<button class="btn btn-primary">Crear nuevo empleado</button>
+			</div>
+		</form>
 	</div>
-</body>
-
-</html>
+</div>
+{% endblock %}
