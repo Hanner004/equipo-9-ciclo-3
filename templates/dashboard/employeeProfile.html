@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="sidebar">
+        <h4 class="dashboard-title">DASHBOARD</h4>
+        {% if role == "Superadministrador" %}
+        <div class="item">
+            <i class="fas fa-id-card-alt"></i>
+            <a href="/dashboard/role">Gestionar roles</a>
+        </div>
+        {% endif %}
+        {% if role == "Superadministrador" or role == "Administrador" %}
+        <div class="item">
+            <i class="fas fa-users"></i>
+            <a href="/dashboard/users">Gestionar empleados</a>
+        </div>
+        {% endif %}
+        {% if role == "Empleado" %}
+        <div class="item">
+            <i class="fas fa-chart-bar"></i>
+            <a href="/dashboard/feedback">Retroalimentación</a>
+        </div>
+        {% endif %}
+        <div class="item active">
+            <i class="fas fa-user-alt"></i>
+            <a href="/dashboard/profile">Perfil</a>
+        </div>
+        <div class="item">
+            <i class="fas fa-sign-out-alt"></i>
+            <a href="/auth/login">Cerrar sesión</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container-xxl">
+            <h5  style="text-align: right; padding: 2%;">
+                {{role}}&nbsp;&nbsp;
+                <img 
+                    class="text-right"
+                    src='{{ url_for("static", filename="img/profile-pic.png") }}' 
+                    alt="Imágen de perfil"
+                />
+            </h5>
+        </div>
+        <div class="container-md p-4 mb-5">
+            <div class="container-xxl">
+                <div class="row p-2">
+                    <div class="col-3 pic-profile">
+                        <img src='{{ url_for("static", filename="img/profile.png") }}' alt="Imágen User">
+                    </div>
+                    <div class="col-9"> 
+                        <div class="row">
+                            <div class="info-profile">
+                                <h2>{{profile.fullname}}</h2>
+                                <div class="name_loc">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>Caquetá / Colombia</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-5">
+                            <div class="col-6">
+                                <div class="py-3">
+                                    <h5>Rol</h5>
+                                    <div class="data">
+                                        <i class="fas fa-address-card"></i>
+                                        <p>{{usrRole.roleName}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="py-3">
+                                    <h5>Correo electrónico</h5>
+                                    <div class="data">
+                                        <i class="fas fa-envelope"></i>
+                                        <p>{{user.email}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="py-3">
+                                    <h5>Teléfono celular</h5>
+                                    <div class="data">
+                                        <i class="fas fa-phone"></i>
+                                        <p>{{profile.phone}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="py-3">
+                                    <h5>Dirección de residencia</h5>
+                                    <div class="data">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <p>{{profile.direction}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="py-3">
+                                    <h5>Fecha de ingreso</h5>
+                                    <div class="data">
+                                        <i class="fa fa-briefcase"></i>
+                                        <p>{{profile.fIngreso}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="py-3">
+                                    <h5>Salario</h5>
+                                    <div class="data">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <p>{{profile.salario}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
