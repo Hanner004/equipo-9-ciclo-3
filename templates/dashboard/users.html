@@ -1,59 +1,72 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="sidebar">
-        <h4 class="dashboard-title">DASHBOARD</h4>
-        {% if role == "Superadministrador" %}
-        <a href="/dashboard/role">Gestionar roles</a>
-        {% endif %}
-        {% if role == "Superadministrador" or role == "Administrador" %}
-        <a class="active" href="/dashboard/users">Gestionar empleados</a>
-        {% endif %}
-        {% if role == "Empleado" %}
-        <a href="/dashboard/feedback">Retroalimentación</a>
-        {% endif %}
-        <a href="/dashboard/profile">Perfil</a>
-        <a href="/auth/login">Cerrar sesión</a>
-    </div>
+<div class="sidebar">
+    <h4 class="dashboard-title">DASHBOARD</h4>
+    {% if role == "Superadministrador" %}
+    <a href="/dashboard/role">Gestionar roles</a>
+    {% endif %}
+    {% if role == "Superadministrador" or role == "Administrador" %}
+    <a class="active" href="/dashboard/users">Gestionar empleados</a>
+    {% endif %}
+    {% if role == "Empleado" %}
+    <a href="/dashboard/feedback">Retroalimentación</a>
+    {% endif %}
+    <a href="/dashboard/profile">Perfil</a>
+    <a href="/auth/login">Cerrar sesión</a>
+</div>
 
-    <div class="content">
+<div class="content">
+    <div class="container-xxl">
+        <h5 style="text-align: right; padding: 2%;">{{role}}&nbsp;&nbsp;<img style="text-align: right;"
+                src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil"></h5>
+    </div>
+    <div style="background-color: white; padding: 2%;" class="container-md">
         <div class="container-xxl">
-            <h5 style="text-align: right; padding: 2%;">{{role}}&nbsp;&nbsp;<img style="text-align: right;" src='{{ url_for("static", filename="img/profile-pic.png") }}' alt="Imágen de perfil"></h5>
-        </div>
-        <div style="background-color: white; padding: 2%;" class="container-md">
-            <div class="container-xxl">
-                <div class="row">
-                    <div class="col" style="text-align: left;"><h1>Empleados</h1></div>
-                    <div class="col" style="text-align: right;"><a href="/dashboard/users/create" class="services-btnSubmit" type="submit">Crear nuevo empleado</a></div>
+            <div class="row">
+                <div class="col" style="text-align: left;">
+                    <h1>Empleados</h1>
                 </div>
-                <br>
-                <div class="row" style="padding: 1%;">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre del usuario</th>
-                                <th scope="col">Teléfono</th>
-                                <th scope="col">Dirección</th>
-                                <th scope="col">Gestionar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% if profile %}
-                                {% for users in profile %}
-                                    <tr>
-                                        <th scope="row">{{users.id}}</th>
-                                        <td>{{users.fullname}}</td>
-                                        <td>{{users.phone}}</td>
-                                        <td>{{users.direction}}</td>
-                                        <td>&nbsp;&nbsp;&nbsp;<img style="height: 35px; width: 35px;" src='{{ url_for("static", filename="img/delete.png") }}'></td>
-                                    </tr>
-                                {% endfor %}
-                            {% endif %}
-                        </tbody>
-                    </table>
-                </div>  
+                <div class="col" style="text-align: right;"><a href="/dashboard/users/create" class="services-btnSubmit"
+                        type="submit">Crear nuevo empleado</a></div>
+            </div>
+            <br>
+            <div class="row" style="padding: 1%;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre del usuario</th>
+                            <th scope="col">Correo electrónico</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Tipo contrato</th>
+                            <th scope="col">Fecha inicio</th>
+                            <th scope="col">Salario</th>
+                            <th scope="col">Gestionar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if profile %}
+                        {% for users in profile %}
+                        <tr>
+                            <th scope="row">{{users.id}}</th>
+                            <td>{{users.fullname}}</td>
+                            <td>{{users.email}}</td>
+                            <td>{{users.phone}}</td>
+                            <td>{{users.direction}}</td>
+                            <td>{{users.tContrato}}</td>
+                            <td>{{users.fIngreso}}</td>
+                            <td>{{users.salario}}</td>
+                            <td>&nbsp;&nbsp;&nbsp;<img style="height: 35px; width: 35px;"
+                                    src='{{ url_for("static", filename="img/delete.png") }}'></td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
