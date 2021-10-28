@@ -9,8 +9,7 @@ body {
 
 .container {
   font-family: "Mulish", sans-serif;
-  margin: 30px;
-  padding: 20px;
+  padding: 40px 40px 0 220px;
 }
 
 .title {
@@ -62,7 +61,7 @@ body {
 
 .form-control::-webkit-input-placeholder {
   color: #000;
-  opacity: 0.32;
+  opacity: 0.4;
 }
 
 .fas {
