@@ -191,9 +191,9 @@ def users():
         .all()
     print(profile)
     if role == "Superadministrador":
-        return render_template("dashboard/users.html", role=role, profile=userList, roles=roles, allusers=users)
+        return render_template("employees.html", role=role, profile=userList, roles=roles, allusers=users)
     elif role == "Administrador":
-        return render_template("dashboard/users.html", role=role, profile=userList, roles=roles, allusers=users)
+        return render_template("employees.html", role=role, profile=userList, roles=roles, allusers=users)
     else:
         flash("No estas autorizado")
         return render_template("dashboard.html", role=role)
@@ -246,9 +246,9 @@ def createUsers():
         role = session['role']
         roleList = Role.query.all()
         if role == "Superadministrador":
-            return render_template("dashboard/createUsers.html", role=role, profile=profile, roleList=roleList)
+            return render_template("adminCreateEmployee.html", role=role, profile=profile, roleList=roleList)
         elif role == "Administrador":
-            return render_template("dashboard/createUsers.html", role=role, profile=profile, roleList=roleList)
+            return render_template("adminCreateEmployee.html", role=role, profile=profile, roleList=roleList)
         else:
             flash("No estas autorizado")
             return render_template("dashboard.html", role=role)
@@ -279,9 +279,9 @@ def logout():
     return redirect("/auth/login")
 
 
-# @app.route("/admin/")
-# def admin():
-#     return render_template("admin.html")
+@app.route("/admin/")
+def admin():
+    return render_template("admin.html")
 
 
 # @app.route("/admin/createemployee/")
