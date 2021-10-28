@@ -188,6 +188,9 @@ div.content {
   cursor: pointer;
   text-align: center;
 }
+.services-btnSubmit:hover{
+  background-color: #2f58ca;
+}
 
 .row .btn-NewEmple a{
   text-decoration: none;
@@ -280,7 +283,7 @@ div.content {
 
 /* Create Feedback */
 
-.fas {
+.fas, .fa {
   font-size: 12px;
   color: white;
 }
@@ -295,4 +298,105 @@ div.content {
   text-align: center;
   border-radius: 1rem;
   background-color: #0062cc;
+}
+
+/*Information User*/
+
+.data-user{
+  display: flex;
+  align-items: center;
+  margin: 15px 20px;
+}
+
+.data-user i, .formSencillo i{
+  color: #444;
+  margin-right: 10px;
+}
+
+.data-user p{
+  margin: 0;
+}
+
+
+/*Edit User*/
+
+.tituloPrincipal{
+  font-family: 'Mulish';
+  margin: 30px 0 0 20px;
+  font-weight: bolder;
+}
+.parr{
+  font-family: 'Mulish';
+  margin: 20px 0px 25px 20px;
+}
+
+.formSencillo{
+  border: 0;
+  width: 100%;
+  height: 59px;
+  display: flex;
+  padding-left: 46px;
+  margin-bottom: 15px;
+  border-radius: 100px;
+  align-items: center;
+  background-color: #e7e7e7;
+}
+
+.formSencillo i{
+  color: #444;
+  margin-right: 10px;
+}
+
+.formSencillo input{
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.botoneraDerecha{
+  justify-content: end;
+}
+
+.botonesSencillos{
+  margin: 10px;
+  width: 100%;
+  height:56px;
+  color: #ffffff;
+  font-weight: bolder;
+  border-width: 3px;
+  border-style: solid;
+  font-family: "Mulish";
+  border-radius: 100px;
+  border-color: #3164F4;
+  background-color: #3164F4;
+}
+.botonesSencillos:hover{
+  border-color: #2f58ca;
+  background-color: #2f58ca;
+}
+
+.botonEditar{
+  margin: 10px;
+  width: 100%;
+  height:56px;
+  display: flex;
+  align-items: center;
+  font-family: "Mulish";
+  border-radius: 100px;
+  justify-content: center;
+  background-color: #3164F4;
+}
+.botonEditar:hover{
+  border-color: #2f58ca;
+  background-color: #2f58ca;
+}
+
+.botonEditar a{
+  color: #ffffff;
+  font-weight: bolder;
+}
+
+.botonEditar a:hover{
+  color: #ffffff;
+  text-decoration: none;
 }
