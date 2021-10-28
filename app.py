@@ -403,20 +403,5 @@ def logout():
     return redirect("/auth/login")
 
 
-# @app.route("/admin/")
-# def admin():
-#     return render_template("admin.html")
-
-
-# @app.route("/admin/createemployee/")
-# def adminCreateEmployee():
-#     return render_template("adminCreateEmployee.html", title='CrearEmpleado')
-
-
-# @app.route("/user/id/")
-# def editUser2():
-#     return render_template("editUser.html", title='Editar usuario')
-
-
 if __name__ == "__main__":
     app.run(debug=True)
