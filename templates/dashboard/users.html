@@ -66,21 +66,27 @@
                         <tbody>
                             {% if profile %}
                                 {% for users in profile %}
-                                    {% set userRole = allusers[loop.index0].roleId %}
+                                    {% set tblUser = allusers[loop.index0] %}
                                     <tr>
                                         <th scope="row">{{users.id}}</th>
                                         <td>{{users.fullname}}</td>
-                                        <td>{{userRole}}</td>
+
+                                        {% if tblUser.roleId == 2 %}
+                                        <td>Administrador</td>
+                                        {% elif tblUser.roleId == 3 %}
+                                        <td>Empleado</td>
+                                        {% endif %}
+
                                         <td>{{users.phone}}</td>
                                         <td>{{users.direction}}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-primary rounded-circle" title="see-more">
+                                            <a class="btn btn-sm btn-primary rounded-circle" href="/dashboard/users/see/{{users.id}}" title="see-more">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-success rounded-circle" title="edit-user">
+                                            <a class="btn btn-sm btn-success rounded-circle" href="/dashboard/users/edit/{{users.id}}" title="edit-user">
                                                 <i class="fas fa-user-edit"></i>
                                             </a>
-                                            {% if userRole == 3 %}
+                                            {% if tblUser.roleId == 3 %}
                                             <a class="btn btn-sm btn-warning rounded-circle" href="/dashboard/users/feedback/{{users.id}}" title="feedback-user">
                                                 <i class="fas fa-chart-bar"></i>
                                             </a>
