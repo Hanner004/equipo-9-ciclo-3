@@ -219,6 +219,50 @@ def users():
         return render_template("dashboard.html", role=role)
 
 
+@app.route("/dashboard/users/see/<int:idEmployee>", methods=["GET"])
+def seeUsers(idEmployee):
+    id = session['id']
+    role = session['role']
+    profile = Profile.query.filter_by(id=idEmployee).first()
+    user = User.query.filter_by(profileId=profile.id).first()
+    return render_template("dashboard/seeUser.html", role=role, user=profile, tbluser=user)
+
+
+@app.route("/dashboard/users/edit/<int:idEmployee>", methods=["GET", "POST"])
+def editUser(idEmployee):
+    id = session['id']
+    role = session['role']
+    profile = Profile.query.filter_by(id=idEmployee).first()
+    user = User.query.filter_by(profileId=profile.id).first()
+    if request.method == "POST":
+        email = escape(request.form["email"].strip())
+        password = escape(request.form["password"].strip())
+        if email != user.email:
+            userEmail = User.query.filter_by(email=email).first()
+            if userEmail:
+                flash("El correo ya se encuentra registrado en el sistema")
+                return redirect(url_for('editUser', idEmployee=idEmployee))
+        if password != "":
+            if check_password_hash(user.password, password) == True:
+                user.set_password(escape(request.form["passwordNew"].strip()))
+                db.session.commit()
+            else:
+                flash("Contraseña actual incorrecta")
+                return redirect(url_for('editUser', idEmployee=idEmployee))
+        profile.fullname = escape(request.form["fullname"].strip())
+        profile.phone = escape(request.form["phone"].strip())
+        profile.direction = escape(request.form["direction"].strip())
+        profile.fIngreso = escape(request.form["fIngreso"].strip())
+        profile.fTermino = escape(request.form["fTermino"].strip())
+        profile.tContrato = escape(request.form["tContrato"].strip())
+        profile.salario = escape(request.form["salario"].strip())
+        user.email = email
+        db.session.commit()
+        flash("Usuario actualizado")
+        return redirect(url_for('users')) 
+    return render_template("dashboard/editUser.html", role=role, user=profile, tbluser=user)
+
+
 @app.route("/dashboard/users/feedback/<int:idEmployee>", methods=["GET", "POST"])
 def createFeedback(idEmployee):
     id = session['id']
@@ -238,7 +282,7 @@ def createFeedback(idEmployee):
     return render_template("dashboard/createFeedback.html", role=role, employee=employee)
 
 
-@app.route("/dashboard/users/delete/<int:idEmployee>", methods=["GET", "POST"])
+@app.route("/dashboard/users/delete/<int:idEmployee>", methods=["GET"])
 def deleteUsers(idEmployee):
     id = session['id']
     role = session['role']
@@ -357,21 +401,6 @@ def feedback():
 def logout():
     session.clear()
     return redirect("/auth/login")
-
-
-# @app.route("/admin/")
-# def admin():
-#     return render_template("admin.html")
-
-
-# @app.route("/admin/createemployee/")
-# def adminCreateEmployee():
-#     return render_template("adminCreateEmployee.html", title='CrearEmpleado')
-
-
-# @app.route("/user/id/")
-# def editUser():
-#     return render_template("editUser.html", title='Editar usuario')
 
 
 if __name__ == "__main__":
